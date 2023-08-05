@@ -43,6 +43,7 @@ let now () : t = Int32.to_int (Sdl.get_ticks ())
 let make_fps ?(min_delay=5) () =
   assert (min_delay >= 0);
   let start = ref 0 in
+  B_draw.at_cleanup (fun () -> start := 0);
   fun fps ->
     if !start = 0 then (delay min_delay; start := now ())
     else
