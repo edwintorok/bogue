@@ -47,9 +47,9 @@ let make_fps ?(min_delay=5) () =
   fun fps ->
     if !start = 0 then (delay min_delay; start := now ())
     else
-      let round_trip = now () - !start in begin
+      let round_trip = max 0 (now () - !start) in begin
         let wait = max min_delay ((1000 / fps) - round_trip) in
-        printd debug_graphics "FPS:%u (round_trip=%u)\n" (1000 / (round_trip + wait)) round_trip;
+        printd debug_graphics "FPS:%u (round_trip=%d, wait = %d)\n" (1000 / (round_trip + wait)) round_trip wait;
         if wait > 0 then
           delay wait;
         start := now ();
