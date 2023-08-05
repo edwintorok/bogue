@@ -588,4 +588,4 @@ let test () =
    * free_chunk chunk2;
    * free_chunk chunk3; *)
 
-  Sdl.quit()
+  Sdl.quit_sub_system Sdl.Init.audio
